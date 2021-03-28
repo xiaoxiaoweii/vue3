@@ -19,23 +19,30 @@
 
 <script lang="ts">
 /* eslint-disable */
-import { defineComponent, ref } from "vue";
+// reactive
+import { reactive,toRefs,ToRefs } from "vue";
+interface DataProps {
+  girls: string[];
+  selectGirl: string;
+  selectGirlFun: (index: number) => void;
+}
 
-export default defineComponent({
+export default {
   name: "App",
   setup() {
-    const girls = ref(["服务员1", "服务员2", "服务员3"]);
-    const selectGirl = ref("");
-    const selectGirlFun = (index: number) => {
-      selectGirl.value = girls.value[index];
-    };
+    const data: DataProps = reactive({
+      girls: ["服务员1", "服务员2", "服务员3"],
+      selectGirl: "",
+      selectGirlFun: (index: number) => {
+        data.selectGirl = data.girls[index];
+      },
+    });
+    const refData = toRefs(data)
     return {
-      girls,
-      selectGirl,
-      selectGirlFun
+      ...refData,
     };
   },
-});
+};
 </script>
 
 <style>
