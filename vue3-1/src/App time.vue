@@ -1,26 +1,17 @@
 <template>
   <!-- eslint-disable -->
   <div>
-    <div v-if="loading">loading。。。。</div>
-    <img v-if="loaded" :src="result.imgUrl" alt="">
+    <h2>欢迎光临晓晓伟餐厅</h2>
+    <div>随机选择一位服务员为您服务</div>
   </div>
 </template>
 
 <script lang="ts">
 /* eslint-disable */
-import useUrlAxios from "./hooks/useURLAxios";
 export default {
   name: "App",
   setup() {
-    const { result, loading, loaded, error } = useUrlAxios(
-      "https://apiblog.jspang.com/default/getGirl"
-    );
-    return {
-      result,
-      loading,
-      loaded,
-      error,
-    };
+    return {};
   },
 };
 </script>
