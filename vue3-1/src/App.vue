@@ -31,7 +31,9 @@ import {
   onUnmounted,
   onActivated,
   onDeactivated,
-  onErrorCaptured
+  onErrorCaptured,
+  onRenderTracked,
+  onRenderTriggered,
 } from "vue";
 interface DataProps {
   girls: string[];
@@ -75,11 +77,22 @@ export default {
     });
     // <keep-alive>中多出的钩子函数
     onDeactivated(() => {
-      console.log("9-比如从 A 组件，切换到 B 组件，A 组件消失时执行 ---- > onDeactivated()");
+      console.log(
+        "9-比如从 A 组件，切换到 B 组件，A 组件消失时执行 ---- > onDeactivated()"
+      );
     });
     // <keep-alive>中多出的钩子函数
     onErrorCaptured(() => {
-      console.log("10-当捕获一个来自子孙组件的异常时激活钩子函数 ---- > onErrorCaptured()");
+      console.log(
+        "10-当捕获一个来自子孙组件的异常时激活钩子函数 ---- > onErrorCaptured()"
+      );
+    });
+    // onRenderTracked 状态跟踪 onRenderTriggered 状态触发
+    onRenderTracked((event) => {
+      console.log(event, "11-状态跟踪钩子函数 ---- > onRenderTracked()");
+    });
+    onRenderTriggered((event) => {
+      console.log(event, "12-状态触发钩子函数 ---- > onRenderTriggered()");
     });
     return {
       ...refData,
