@@ -1,31 +1,28 @@
 <template>
   <!-- eslint-disable -->
   <div>
-    <div v-if="loading">loading。。。。</div>
-    <img v-if="loaded" :src="result.imgUrl" alt="">
-    <model></model>
+    <Suspense>
+      <template #default>
+        <async-show />
+      </template>
+      <template #fallback>
+        <h1>Loading...</h1>
+      </template>
+    </Suspense>
   </div>
 </template>
 
 <script lang="ts">
 /* eslint-disable */
-import useUrlAxios from "./hooks/useURLAxios";
-import model from './components/Model.vue'
+import asyncShow from './components/asyncShow.vue'
 export default {
   name: "App",
   components: {
-    model
+    asyncShow
   },
   setup() {
-    const { result, loading, loaded, error } = useUrlAxios(
-      "https://apiblog.jspang.com/default/getGirl"
-    );
-    return {
-      result,
-      loading,
-      loaded,
-      error,
-    };
+
+    return {};
   },
 };
 </script>
