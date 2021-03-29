@@ -3,14 +3,19 @@
   <div>
     <div v-if="loading">loading。。。。</div>
     <img v-if="loaded" :src="result.imgUrl" alt="">
+    <model></model>
   </div>
 </template>
 
 <script lang="ts">
 /* eslint-disable */
 import useUrlAxios from "./hooks/useURLAxios";
+import model from './components/Model.vue'
 export default {
   name: "App",
+  components: {
+    model
+  },
   setup() {
     const { result, loading, loaded, error } = useUrlAxios(
       "https://apiblog.jspang.com/default/getGirl"
