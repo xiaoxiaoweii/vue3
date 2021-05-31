@@ -1,4 +1,4 @@
-<template>
+<template> 
   <h1>
     {{ result }}
   </h1>
@@ -14,4 +14,4 @@ export default defineComponent({
     });
   },
 });
-</script>
+</script> 
