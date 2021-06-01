@@ -13,34 +13,19 @@
     <div id="root"></div>
 </body>
 <script>
+    // createApp 表示创建一个Vue应用 存储到app变量里边
+    // 传入的参数表示 这个应用最外层组件 应该如何展示
+    // MVVM设计模式 m model 数据 v view 视图 vm viewModel 视图连接层
     const app = Vue.createApp({
         data() {
             return {
-                list: [],
-                inputValue: null
+                message: 'hello'
             }
         },
-        methods: {
-            handleAddItem() {
-                this.list.push(this.inputValue)
-                this.inputValue = null
-            }
-        },
-        template: `
-        <div>
-            <input v-model="inputValue" />
-            <button @click="handleAddItem" :title='inputValue'>增加</button>
-            <ul>
-                <todo-item v-for="(item,index) in list" :key='index' :content="item" :index = 'index' >{{index}}--{{item}}</todo-item>    
-            </ul>
-        </div>
-        `
+        template: '<div>{{message}}</div>'
     })
-    app.component('todo-item', {
-        props: ['content', 'index'],
-        template: `<div>{{index}}:{{content}}</div>`
-    })
-    app.mount('#root')
+    // vm代表的是vue应用的根组件
+    const vm = app.mount('#root')
 </script>
 
 </html>
