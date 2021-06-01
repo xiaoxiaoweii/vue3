@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // 声明周期函数 在某一时刻会自动执行的函数
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'hello'
+            }
+        },
+        methods: {
+            handleItemClick() {
+                alert('click')
+            }
+        },
+        // 实例创建之前自动执行的函数
+        beforeCreate() {
+            console.log('beforeCreate ')
+        },
+        // 实例生成之后自动执行的函数
+        created() {
+            console.log('created')
+        },
+        // 在组件内容被渲染之前立即执行的函数
+        beforeMount() {
+            console.log(document.getElementById('root').innerHTML,'beforMount')
+        },
+        // 在组件内容被渲染之后执行
+        mounted() {
+            console.log(document.getElementById('root').innerHTML,'mounted')
+        },
+        // 当data中的数据发生变化时自动执行的函数
+        beforeUpdate() {
+            console.log('beforeUpdate')
+        },
+        // 当data中的数据发生变化 页面重新渲染之后 会自动执行的函数
+        updated() {
+            console.log('updated')
+        },
+        // vue实例销毁时 自动执行的函数
+        beforeUnmount() {
+            console.log('beforeUnmount')
+        },
+        // vue实例已经被销毁 且dom完全销毁自动执行的函数
+        unmount() {
+            console.log('unmount')
+        },
+        template: '<div @click="handleItemClick">{{message}}</div>'
+    })
+    // vm代表的是vue应用的根组件
+    const vm = app.mount('#root')
+</script>
+
+</html>
