@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // data & methods & computed & watcher
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'hello',
+                count: 2,
+                price: 5
+            }
+        },
+        computed: {
+            // 当计算属性以来的内容发生变化时 才会重新执行
+            total() {
+                return this.count * this.price
+            }
+        },
+        watch: {
+            // price发生变化时候 函数会执行
+            price(current,prev) {
+                setTimeout(() => {
+                    console.log('price change')
+                },5000)
+            }
+        },
+        methods: {
+            // 只要页面重新渲染 才会重新计算
+            handleClick() {
+                console.log('click', this)
+            }
+        },
+        template: `<div @click='handleClick'>hello</div>
+                    <div>{{total}}</div>
+        `
+    })
+    // vm代表的是vue应用的根组件
+    const vm = app.mount('#root')
+</script>
+
+</html>
