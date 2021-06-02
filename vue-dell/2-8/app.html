@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // data & methods & computed & watcherc
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'hello',
+                classString: 'red',
+                classObject: {
+                    red: true,
+                    green: false
+                },
+                classArray: ['red', 'green', {
+                    btown: false
+                }],
+                styleString: 'color: yellow',
+                styleObject: {
+                    color: 'yellow'
+                }
+            }
+        },
+        template: `<div :class='classArray'>{{message}}<demo  class="red" /></div>
+            <div :style='styleString'>yellow</div>
+                    
+        `
+    })
+    app.component('demo', {
+        template: `<div :class="$attrs.class">single1</div>
+        <div>single2</div>`
+    })
+    // vm代表的是vue应用的根组件
+    const vm = app.mount('#root')
+</script>
+
+</html>
