@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'hello',
+                a: '<strong>加粗</strong>',
+                disabled: true,
+                name: 'title',
+                event: 'click'
+            }
+        },
+        methods: {
+            handleClick() {
+                console.log('hahaha')
+            },
+        },
+        template: `<div @[event]="handleClick">{{message}}</div>
+                    <div v-html="a"></div>
+                    <div :[name]="message">title</div>
+                    <input :disabled="disabled" />
+                    <div>{{Math.max(1,2)}}</div>
+                    <div v-once="message">{{message}}</div>
+                    <div v-if="disabled">{{message}}</div>
+                    // 修饰符
+                    <form action="http://www.baidu.com" @click.prevent="handleClick">
+                        <button type="submit">百度</button>
+                    </form>`
+    })
+    // vm代表的是vue应用的根组件
+    const vm = app.mount('#root')
+</script>
+
+</html>
