@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // data & methods & computed & watcherc
+    const app = Vue.createApp({
+        data() {
+            return {
+               listArr: ['xiaoxiao','wei'],
+               listObj: {
+                   name: `xiaoxiao`,
+                   name1: `wei`
+               }
+            }
+        },
+        methods: {
+            handleClick() {
+                // 1.数组变更函数
+                // push pop shift unshift splice sort reverse
+                // this.listArr.push('新增啦')
+                // 2. 直接替换数组
+                // this.listArr = ['1']
+                // this.listArr = ['bye'].concat(['world'])
+                // this.listArr = ['bye','world'].filter(item => item === 'bye')
+                // 3. 直接更新数组的内容
+                // this.listArr[0] = 'add'
+
+                // 1. 直接添加对象的内容 也可以自动展示出来
+                this.listObj.age = '10'
+            }
+        },
+        template: `
+        <div v-for="(item,index) in listArr" :key='index'>{{item}}---{{index}}</div>
+        <div v-for="item in 10">{{item}}</div>
+        <div v-for="(value,key,index) in listObj" :key='index'>{{value}}---{{key}} --- {{index}}</div>
+        <button @click="handleClick">新增</button>
+        `
+    })
+    // vm代表的是vue应用的根组件
+    const vm = app.mount('#root')
+</script>
+
+</html>
