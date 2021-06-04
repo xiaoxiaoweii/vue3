@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // 事件修饰符 stop prevent capture self once passive
+    // 按键修饰符 enter tab delete esc
+    // 鼠标修饰符 left right middle
+    // 精确修饰符 exact
+    // data & methods & computed & watcherc
+    const app = Vue.createApp({
+        data() {
+            return {
+                counter: 1
+            }
+        },
+        methods: {
+            handleClick(num, event) {
+                console.log(event)
+                this.counter += num
+            },
+            handleClick1() {
+                console.log('1')
+            },
+            handleClick2() {
+                console.log('2')
+            },
+            handleClick3() {
+                console.log('3')
+            },
+            handleKeyDown() {
+                console.log('keyDown')
+            }
+        },
+        template: `
+            <button @click='handleClick(2,$event)'>按钮1</button>
+            <button @click='handleClick(2,$event),handleClick1()'>按钮2</button>
+            <span @click.self='handleClick2'>
+                自己
+                <!-- prevent once capture passive -->
+                <!-- <button @click.stop='handleClick3'>按钮3</button> -->
+                <button @click='handleClick3'>按钮3</button>    
+            </span>
+            <div>
+                <input @keydown.delete ="handleKeyDown">
+            </div>
+            `
+    })
+    // vm代表的是vue应用的根组件
+    const vm = app.mount('#root')
+</script>
+
+</html>
