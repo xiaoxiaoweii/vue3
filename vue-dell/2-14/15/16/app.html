@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // 事件修饰符 stop prevent capture self once passive
+    // 按键修饰符 enter tab delete esc
+    // 鼠标修饰符 left right middle
+    // 精确修饰符 exact
+    // data & methods & computed & watcherc
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'xiaoxiaowei',
+                flag: true,
+                flagArr: [],
+                flagRadio: '',
+                selectValue: [],
+                checkValue: '',
+                valueDeco: '',
+                valueNumber: '',
+                valueTrim: ''
+            }
+        },
+        methods: {},
+        template: `
+            <div>
+                <input v-model="message" />
+                <textarea v-model='message' />
+                <input type = 'checkbox' v-model='flag' />
+            </div>
+            <div>
+                {{flagArr}}
+                xiao <input type = 'checkbox' v-model='flagArr' value='xiao' />
+                wei <input type = 'checkbox' v-model='flagArr' vaue = 'wei' />
+                da <input type = 'checkbox' v-model='flagArr' value='da' />
+            </div>
+            <div>
+                {{checkValue}}<input type = 'checkbox' v-model='checkValue' value='xiao' true-value = 'hello' false-value='world' />
+            </div>
+            <div>
+                {{flagRadio}}
+                xiao <input type = 'radio' v-model='flagRadio' value='xiao' />
+                wei <input type = 'radio' v-model='flagRadio' value = 'wei' />
+                da <input type = 'radio' v-model='flagRadio' value='da' />
+            </div>
+            <div>
+                {{selectValue}}
+                <select v-model='selectValue' multiple>
+                    <option disbaled value=''>请选择内容</option>    
+                    <option value="A">A</option>    
+                    <option value ="B">B</option>    
+                </select>
+            </div>
+            <div>
+                {{valueDeco}}
+                lazy<input  v-model.lazy='valueDeco' />
+                number--{{valueNumber}}<input  v-model.number='valueNumber' type = 'number' />
+                trim--{{valueTrim}}<input  v-model.trim='valueTrim' />
+            </div>
+            `
+    })
+    // vm代表的是vue应用的根组件
+    const vm = app.mount('#root')
+</script>
+
+</html>
