@@ -13,7 +13,27 @@
     <div id="root"></div>
 </body>
 <script>
-    const count = {
+    const app = Vue.createApp({
+        data() {
+            return {
+            }
+        },
+        template: `
+            <div>
+                <count /> 
+                <count-parent /> 
+            </div>
+        `
+    })
+    app.component('count-parent',{
+        data() {
+            return {}
+        },
+        template: `
+            <count />    
+        `
+    })
+    app.component('count',{
         data() {
             return {
                 count: 1
@@ -22,19 +42,6 @@
         template: `
             <div @click="count += 1">
                 {{count}}
-            </div>
-        `
-    }
-    const app = Vue.createApp({
-        components: {
-            count
-        },
-        data() {
-            return {}
-        },
-        template: `
-            <div>
-                <count /> 
             </div>
         `
     })
