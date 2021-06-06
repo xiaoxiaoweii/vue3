@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                num: 1,
+                num1: 2,
+                string1: 'a'
+            }
+        },
+        methods: {
+            handleAdd(params) {
+                this.num = params
+            },
+            handleChange(params) {
+                this.num1 = params
+            }
+        },
+        template: `
+            <div>
+                <test1 v-model:app='num' :content = 'num1' @handle-change-one='handleChange' />
+                <test2 v-model:app= 'num' v-model:app1='num1' />
+                <test3 v-model.uppercase= 'string1' />
+            </div>
+        `
+    })
+    app.component('test1', {
+        props: ['app', 'content'],
+        methods: {
+            handlelick() {
+                this.$emit('update:app', this.modelValue + 3)
+            },
+            handlelick1() {
+                this.$emit('handleChangeOne', this.content + 1)
+            }
+        },
+        template: `
+            <div @click='handlelick'>
+                test1---{{app}}
+            </div>
+            <div @click='handlelick1'>
+                test2---{{content}}
+            </div>
+        `
+    })
+    app.component('test2', {
+        props: ['app', 'app1'],
+        methods: {
+            handlelick() {
+                this.$emit('update:app', this.app + 3)
+            },
+            handlelick1() {
+                this.$emit('update:app1', this.app1 + 1)
+            }
+        },
+        template: `
+            <div @click='handlelick'>
+                test2--{{app}}
+            </div>
+            <div @click='handlelick1'>
+                test2--{{app1}}
+            </div>
+        `
+    })
+    app.component('test3', {
+        props: {
+            'modelValue': String,
+            'modelModifiers': {
+                default: () => {
+
+                }
+            }
+        },
+        mounted() {
+            console.log(this.modelModifiers)
+        },
+        methods: {
+            handlelick() {
+                let newValue = this.modelValue + 'b';
+                if(this.modelModifiers.uppercase) {
+                    newValue = newValue.toUpperCase()
+                }
+                this.$emit('update:modelValue', newValue)
+            },
+        },
+        template: `
+            <div @click='handlelick'>
+                test3---{{modelValue}}
+            </div>
+        `
+    })
+    app.mount('#root')
+</script>
+
+</html>
