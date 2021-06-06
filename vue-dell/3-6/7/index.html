@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                num: 1
+            }
+        },
+        methods: {
+            handleAdd(params) {
+                this.num = params
+            }
+        },
+        template: `
+            <div>
+                <test :content='num' @add-one="handleAdd" /> 
+                <test1 v-model:app='num' />
+            </div>
+        `
+    })
+    app.component('test', {
+        props: ['content'],
+        emits: {
+            addOne: (count) => {
+                if(count > 0) {
+                    console.log('大于0')
+                    return
+                }
+                console.log('小于0')
+            }
+        },
+        methods: {
+            handlelick() {
+                this.$emit('addOne',this.content + 3)
+            }
+        },
+        template: `
+            <div @click='handlelick'>
+                {{content}}
+            </div>
+        `
+    })
+    app.component('test1', {
+        props: ['app'],
+        methods: {
+            handlelick() {
+                this.$emit('update:app',this.modelValue + 3)
+            }
+        },
+        template: `
+            <div @click='handlelick'>
+                {{app}}
+            </div>
+        `
+    })
+    app.mount('#root')
+</script>
+
+</html>
