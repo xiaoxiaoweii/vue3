@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                params: {
+                    num: '1001',
+                    a: '1',
+                    b: '2',
+                    c: '3'
+                },
+                content: 1
+            }
+        },
+        template: `
+            <div>
+                <test v-bind='params' /> 
+                <test2 :content-abc="content" />
+                <test3 :content ='content' />
+            </div>
+        `
+    })
+    app.component('test', {
+        props: ['num','a','b','c'],
+        template: `
+            <div>
+                {{num}}--{{a}}--{{b}}--{{c}}
+            </div>
+        `
+    })
+    app.component('test2', {
+        props: ['contentAbc'],
+        template: `
+            <div>{{contentAbc}}</div>
+        `
+    })
+    app.component('test3', {
+        props: ['content'],
+        data() {
+            return {
+                num: this.content
+            }
+        },
+        template: `
+            <div @click='num += 1'>{{num}}</div>
+        `
+    })
+    app.mount('#root')
+</script>
+
+</html>
