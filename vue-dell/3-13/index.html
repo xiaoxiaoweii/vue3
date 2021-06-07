@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        template: `
+            <test/>
+        `,
+        provide() {
+            return {
+                count: this.count
+            }
+        },
+        data() {
+            return {
+                count: '111'
+            }
+        }
+    })
+    app.component('test', {
+        template: `
+            <div>
+                <test1 />
+            </div>
+        `
+    })
+    app.component('test1', {
+        template: `
+            <div>
+                test1---{{count}}
+            </div>
+        `,
+        inject: ['count']
+    })
+    app.mount('#root')
+</script>
+
+</html>
