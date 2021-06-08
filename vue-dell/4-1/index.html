@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @keyframes leftTotight {
+            0% {
+                transform: translateX(-100px);
+            }
+
+            50% {
+                transform: translateX(-50px);
+            }
+
+            0% {
+                transform: translateX(0px);
+            }
+        }
+
+        .animation {
+            animation: leftTotight 3s;
+        }
+
+        .transition {
+            transition: 3s background-color ease;
+        }
+        .blue {
+            background: blue;
+        }
+        .red {
+            background: red;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // 过渡 动画
+    const app = Vue.createApp({
+        data() {
+            return {
+                animate:  {
+                    animation: true
+                },
+                transition: {
+                    transition: true,
+                    blue: true,
+                    red: false
+                }
+            }
+        },
+        methods: {
+            handleClick() {
+                this.animate.animation = !this.animate.animation
+            },
+            handleTransition() {
+                this.transition.blue = !this.transition.blue
+                this.transition.red = !this.transition.red
+            }
+        },
+        template: `
+            <div :class="animate">hello</div>
+            <button @click='handleClick'>动画切换</button>
+            <div :class="transition">hello</div>
+            <button @click='handleTransition'>过渡切换</button>
+        `,
+    })
+    app.mount('#root')
+</script>
+
+</html>
