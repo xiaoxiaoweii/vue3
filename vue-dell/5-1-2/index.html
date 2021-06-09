@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    </head>
+
+    <body>
+        <div id="root"></div>
+    </body>
+    <script>
+        // mixin 混入
+        // 组件data优先级高于mixin data优先级
+        // 生命周期函数先执行mixins里的 再执行组件里的
+        const myMixin = {
+            data() {
+                return {
+                    number: 2,
+                    count:2
+                }
+            },
+            created() {
+                console.log('mixin created')
+            },
+            methods: {
+                handleClick() {
+                    console.log('mixins handleClick')
+                }
+            }
+        }
+        // 单元素单组件的入场出场动画
+        const app = Vue.createApp({
+            // data() {
+            //     return {
+            //         number: 1
+            //     }
+            // },
+            methods: {
+                handleClick() {
+                    console.log('handleClick')
+                },
+            },
+            created() {
+                console.log('components')
+            },
+            mixins: [myMixin],
+            template: `
+            <div>{{number}}</div>
+            <div>{{count}}</div>
+            <button @click='handleClick'>切换</button>
+        `,
+        })
+        app.mount('#root')
+    </script>
+
+</html>
