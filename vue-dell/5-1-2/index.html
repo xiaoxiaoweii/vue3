@@ -15,11 +15,12 @@
         // mixin 混入
         // 组件data优先级高于mixin data优先级
         // 生命周期函数先执行mixins里的 再执行组件里的
+        // 自定义的属性 组件中的属性优先级高于mixin属性的优先级
         const myMixin = {
+            number: 2,
             data() {
                 return {
                     number: 2,
-                    count:2
                 }
             },
             created() {
@@ -33,26 +34,16 @@
         }
         // 单元素单组件的入场出场动画
         const app = Vue.createApp({
-            // data() {
-            //     return {
-            //         number: 1
-            //     }
-            // },
-            methods: {
-                handleClick() {
-                    console.log('handleClick')
-                },
-            },
-            created() {
-                console.log('components')
-            },
+            number: 3,
             mixins: [myMixin],
             template: `
-            <div>{{number}}</div>
-            <div>{{count}}</div>
-            <button @click='handleClick'>切换</button>
-        `,
+                <div>{{this.$options.number}}</div>
+                <button @click='handleClick'>切换</button>
+            `,
         })
+        app.config.optionMergeStrategies.number = (mixinVal,appValue) => {
+            return mixinVal || appValue
+        }
         app.mount('#root')
     </script>
 
