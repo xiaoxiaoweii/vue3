@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<title>Document</title>
+<style></style>
+<script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // render function
+    // template -> render -> h -< 虚拟DOM(JS对象) -> 真实DOM -> 展示到页面
+    const app = Vue.createApp({
+        template: `
+            <my-title :level='1'>
+                hello1    
+            </my-title>
+        `,
+    })
+    app.component('my-title', {
+        props: ['level'],
+        render() {
+            const {
+                h
+            } = Vue
+            // 虚拟 DOM
+            return h('h' + this.level, {}, [this.$slots.default()], h('h3', {}, 'xiaoxiaowei'))
+        }
+    })
+    app.mount('#root')
+</script>
+
+</html>
