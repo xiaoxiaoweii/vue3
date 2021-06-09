@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<title>Document</title>
+<script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    /* 局部自定义指令 */
+    // beforeMount mounted beforeUpdate updated bbeforeUnmount unmounted
+    const directives = {
+        focus: {
+            mounted(el) {
+                el.focus()
+            }
+        }
+    }
+    // 自定义指令 directive
+    const app = Vue.createApp({
+        directives: directives,
+        data() {
+            return {
+                number: 1
+            }
+        },
+        methods: {
+            handleClick() {
+                console.log("handleClick")
+            },
+        },
+        template: `
+            <div>
+                <input v-focus />    
+            </div>
+        `,
+    })
+    /* 全局自定义指令 */
+    // app.directive('focus', {
+    //     mounted(el) {
+    //         el.focus()
+    //     }
+    // })
+    app.mount('#root')
+</script>
+
+</html>

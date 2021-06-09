@@ -6,9 +6,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <title>Document</title>
 <style>
-    .header {
+    .area {
         position: absolute;
-
+        width: 200px;
+        height: 300px;
+        background: #000;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .mask {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        background: green;
+        opacity: 0.5;
     }
 </style>
 <script src="https://unpkg.com/vue@next"></script>
@@ -23,26 +37,19 @@
     const app = Vue.createApp({
         data() {
             return {
-                distance: 300
+                show: false
             }
         },
         template: `
-            <div v-pos:left='distance' class='header'>
-                <input />    
+            <div class='area'>
+                <button @click='show = !show'>按钮</button>
+                <teleport to='body'>
+                    <div class="mask" v-show="show">hello</div>
+                </teleport>
+                
             </div>
         `,
     })
-    app.directive('pos',(el,binding) => {
-        el.style[binding.arg] = (binding.value) + 'px'
-    })
-    // app.directive('pos', {
-    //     mounted(el,binding) {
-    //         el.style.top = binding.value + 'px'
-    //     },
-    //     updated(el,binding) {
-    //         el.style.top = binding.value + 'px'
-    //     }
-    // })
     app.mount('#root')
 </script>
 
