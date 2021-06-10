@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<title>Document</title>
+<style></style>
+<script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // ref reactive 响应式的引用 
+    // 原理 通过proxy对数据进行封装 当数据变化时  触发模板等内容的更新
+    // ref处理基础类型的数据
+    // reactive处理非基础类型数据
+    const app = Vue.createApp({
+        // created 实例被完全初始化之前
+        setup(props, context) {
+            const {
+                reactive,
+                readonly
+            } = Vue
+            let nameObj = reactive({
+                name: 'xiaoxiao'
+            });
+            setTimeout(() => {
+                nameObj.name = 'wei'
+                copyNameObj.name = 'wei'
+            }, 2000)
+            const copyNameObj = readonly(nameObj)
+
+            return {
+                nameObj,
+                copyNameObj
+            }
+        },
+        template: `
+            <div>hello {{nameObj.name}}</div>
+        `,
+    })
+    app.mount('#root')
+</script>
+
+</html>
