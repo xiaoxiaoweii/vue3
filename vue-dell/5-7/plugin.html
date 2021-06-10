@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<title>Document</title>
+<style></style>
+<script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // plugin插件 把通用性的功能封装起来
+    const myPlugin = {
+        install(app,options) {
+            app.provide('name','xiaoxiaowei')
+            app.directive('focus',{
+                mounted(el) {
+                    el.focus()
+                }
+            })
+            app.mixin({
+                mounted() {
+                    console.log('mixin')
+                }
+            })
+            app.config.globalProperties.$sayHello = 'hello world'
+        }
+    }
+    const app = Vue.createApp({
+        template: `
+            <my-title></my-title>
+        `,
+        mounted() {
+            console.log(this.$sayHello)
+        }
+    })
+    app.component('my-title', {
+        inject: ['name'],
+        template: '<div>{{name}}<input v-focus></input></div>'
+    })
+    app.use(myPlugin,{name: 'xiaoxiaowei'})
+    app.mount('#root')
+</script>
+
+</html>
