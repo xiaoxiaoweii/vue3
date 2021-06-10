@@ -13,15 +13,26 @@
     <div id="root"></div>
 </body>
 <script>
+    // ref reactive 响应式的引用 
+    // 原理 通过proxy对数据进行封装 当数据变化时  触发模板等内容的更新
+    // ref处理基础类型的数据
+    // reactive处理非基础类型数据
     const app = Vue.createApp({
         // created 实例被完全初始化之前
         setup(props, context) {
+            const {
+                reactive
+            } = Vue
+            let nameObj = reactive({name: 'xiaoxiao'});
+            setTimeout(() => {
+                nameObj.name = 'wei'
+            }, 2000)
             return {
-                name: 'xiaoxiao'
+                nameObj
             }
         },
         template: `
-            <div>hello {{name}}</div>
+            <div>hello {{nameObj.name}}</div>
         `,
     })
     app.mount('#root')
