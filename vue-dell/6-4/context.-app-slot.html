@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<title>Document</title>
+<style></style>
+<script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        template: `
+            <child app = 'app'>parent</child>
+        `,
+    })
+    app.component('child', {
+        template: `
+            <div>child</div>
+        `,
+        /* 
+         attrs 父组件传过来的non-props属性
+        */
+        setup(props, context) {
+            const { h } = Vue
+            const {
+                attrs,
+                slots,
+                emit
+            } = context
+            console.log(attrs.app,slots.default(),emit)
+            return () => h('div',{},slots.default())
+        }
+
+    })
+    app.mount('#root')
+</script>
+
+</html>
