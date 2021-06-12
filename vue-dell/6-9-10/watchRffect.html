@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<title>Document</title>
+<style></style>
+<script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        // created 实例被完全初始化之前
+        setup(props, context) {
+            const {
+                ref,
+                watch,
+                reactive,
+                toRefs,
+                watchEffect
+            } = Vue
+            let name = ref('xiaoxiao')
+            let nameObj = reactive({
+                name1: 'xiaoxiaowei',
+                name2: 'wei'
+            })
+            let {
+                name1,
+                name2
+            } = toRefs(nameObj)
+            // 具备一定惰性
+            // 参数可以拿到原始和当前值
+            // 可以侦听多个监听器的变化 用一个监听器加载
+            watch(name, (currentValue, prevValue) => {
+                console.log(currentValue, prevValue)
+            })
+            watch([() => nameObj.name1, () => nameObj.name2], ([name1, name2], [pname1, pname2]) => {
+                console.log(name1, name2, pname1, pname2)
+            }, {
+                immediate: true
+            })
+            // 立即执行 immediate
+            // 不需要传递你要监听的内容 自动会感知代码依赖 不需要传递很多参数 只要传递一个回调函数
+            // 不能获取之前数据的值
+            const stop = watchEffect(() => {
+                console.log(nameObj.name1)
+                setTimeout(() => {
+                    stop()
+                }, 2000)
+            })
+            return {
+                name,
+                name1,
+                name2
+            }
+        },
+        template: `
+            <div>
+                <div>
+                    name: <input v-model = 'name' />
+                </div>
+                <div>
+                    name is {{ name }}
+                </div> 
+                <div>
+                    name1: <input v-model = 'name1' />
+                </div>
+                <div>
+                    name1 is {{ name1 }}
+                </div>  
+                <div>
+                    name2: <input v-model = 'name2' />
+                </div>
+                <div>
+                    name2 is {{ name2 }}
+                </div>      
+            </div>
+        `,
+    })
+    app.mount('#root')
+</script>
+
+</html>
