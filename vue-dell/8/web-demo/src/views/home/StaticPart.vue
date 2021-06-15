@@ -12,52 +12,63 @@
     <img class="banner__img" src="@/assets/banner.jpg" />
   </div>
   <div class="icons">
-    <div class="icons__item">
-      <img class="icons__item__img" src="@/assets/icon.png" alt="" />
-      <p class="icons__item__desc">超市便利</p>
-    </div>
-    <div class="icons__item">
-      <img class="icons__item__img" src="@/assets/icon.png" alt="" />
-      <p class="icons__item__desc">超市便利</p>
-    </div>
-    <div class="icons__item">
-      <img class="icons__item__img" src="@/assets/icon.png" alt="" />
-      <p class="icons__item__desc">超市便利</p>
-    </div>
-    <div class="icons__item">
-      <img class="icons__item__img" src="@/assets/icon.png" alt="" />
-      <p class="icons__item__desc">超市便利</p>
-    </div>
-    <div class="icons__item">
-      <img class="icons__item__img" src="@/assets/icon.png" alt="" />
-      <p class="icons__item__desc">超市便利</p>
-    </div>
-    <div class="icons__item">
-      <img class="icons__item__img" src="@/assets/icon.png" alt="" />
-      <p class="icons__item__desc">超市便利</p>
-    </div>
-    <div class="icons__item">
-      <img class="icons__item__img" src="@/assets/icon.png" alt="" />
-      <p class="icons__item__desc">超市便利</p>
-    </div>
-    <div class="icons__item">
-      <img class="icons__item__img" src="@/assets/icon.png" alt="" />
-      <p class="icons__item__desc">超市便利</p>
-    </div>
-    <div class="icons__item">
-      <img class="icons__item__img" src="@/assets/icon.png" alt="" />
-      <p class="icons__item__desc">超市便利</p>
-    </div>
-    <div class="icons__item">
-      <img class="icons__item__img" src="@/assets/icon.png" alt="" />
-      <p class="icons__item__desc">超市便利</p>
+    <div class="icons__item" v-for="(item, index) in iconList" :key="index">
+      <img class="icons__item__img" :src="item.imgUrl" />
+      <p class="icons__item__desc">{{ item.desc }}</p>
     </div>
   </div>
   <div class="gap"></div>
 </template>
 <script>
 export default {
-  name: 'StaticPart'
+  name: 'StaticPart',
+  setup () {
+    const iconList = [
+      {
+        imgUrl: require('@/assets/icon.png'),
+        desc: '超市便利'
+      },
+      {
+        imgUrl: require('@/assets/icon.png'),
+        desc: '超市便利'
+      },
+      {
+        imgUrl: require('@/assets/icon.png'),
+        desc: '超市便利'
+      },
+      {
+        imgUrl: require('@/assets/icon.png'),
+        desc: '超市便利'
+      },
+      {
+        imgUrl: require('@/assets/icon.png'),
+        desc: '超市便利'
+      },
+      {
+        imgUrl: require('@/assets/icon.png'),
+        desc: '超市便利'
+      },
+      {
+        imgUrl: require('@/assets/icon.png'),
+        desc: '超市便利'
+      },
+      {
+        imgUrl: require('@/assets/icon.png'),
+        desc: '超市便利'
+      },
+      {
+        imgUrl: require('@/assets/icon.png'),
+        desc: '超市便利'
+      },
+      {
+        imgUrl: require('@/assets/icon.png'),
+        desc: '超市便利'
+      }
+    ]
+    return {
+      iconList
+    }
+  }
 }
 </script>
 <style lang="scss">
