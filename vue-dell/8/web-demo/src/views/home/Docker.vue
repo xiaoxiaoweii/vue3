@@ -43,7 +43,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scope>
 @import "@/style/varibles.scss";
 @import "@/style/mixins.scss";
 .docker {
