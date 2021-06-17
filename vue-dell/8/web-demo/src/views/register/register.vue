@@ -1,47 +1,49 @@
 <template>
-  <div class="wrapper">
-    <img class="wrapper__img" src="@/assets/login.jpg" />
-    <div class="wrapper__input">
+  <div class="owrapper">
+    <img class="owrapper__img" src="@/assets/login.jpg" />
+    <div class="owrapper__input">
       <input
         placeholder="请输入手机号"
         type="text"
-        class="wrapper__input__content"
+        class="owrapper__input__content"
       />
     </div>
-    <div class="wrapper__input">
+    <div class="owrapper__input">
       <input
         placeholder="请输入密码"
-        class="wrapper__input__content"
+        class="owrapper__input__content"
         type="password"
       />
     </div>
-    <div class="wrapper__login-button" @click="handleLogin">登录</div>
-    <div class="wrapper__login-link" @click="handleRegisterClick">立即注册</div>
+    <div class="owrapper__input">
+      <input
+        placeholder="确认密码"
+        class="owrapper__input__content"
+        type="password"
+      />
+    </div>
+    <div class="owrapper__login-button">注册</div>
+    <div class="owrapper__login-link" @click="handleLoginClick">
+      已有帐号去登陆
+    </div>
   </div>
 </template>
 <script>
 import { useRouter } from 'vue-router'
 export default {
-  name: 'login',
+  name: 'register',
   setup () {
     const router = useRouter()
-    const handleLogin = () => {
-      localStorage.isLogin = true
-      router.push({ name: 'home' })
+    const handleLoginClick = () => {
+      router.push({ name: 'login' })
     }
-    const handleRegisterClick = () => {
-      router.push({ name: 'register' })
-    }
-    return {
-      handleLogin,
-      handleRegisterClick
-    }
+    return { handleLoginClick }
   }
 }
 </script>
 <style lang="scss" scoped>
 @import "@/style/varibles.scss";
-.wrapper {
+.owrapper {
   position: absolute;
   top: 50%;
   left: 0;

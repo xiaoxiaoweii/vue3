@@ -4,11 +4,16 @@ import {
 } from 'vue-router'
 import home from '../views/home/home.vue'
 import login from '../views/login/login.vue'
-
+import register from '../views/register/register.vue'
 const routes = [{
   path: '/',
   name: 'home',
   component: home
+},
+{
+  path: '/register',
+  name: 'register',
+  component: register
 },
 {
   path: '/login',
@@ -38,7 +43,11 @@ router.beforeEach((to, from, next) => {
   const {
     isLogin
   } = localStorage
-  isLogin || to.name === 'login' ? next() : next({
+  const {
+    name
+  } = to
+  const isLoginOrRegister = (name === 'login' || name === 'register')
+  isLogin || isLoginOrRegister ? next() : next({
     name: 'login'
   })
 })
